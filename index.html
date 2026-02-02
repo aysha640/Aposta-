@@ -7,38 +7,74 @@
 <style>
 body{
     margin:0;
-    padding:0;
-    background: linear-gradient(135deg, #000000, #2b0020);
+    background: linear-gradient(135deg,#000,#2b0020);
+    font-family:Arial, sans-serif;
     color:#ff2f92;
-    font-family: Arial, sans-serif;
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
-    text-align:center;
 }
 
-.container{
-    background:#000000cc;
+.main-box{
+    background:#000000d9;
+    width:90%;
+    max-width:900px;
     padding:50px;
-    border-radius:20px;
-    box-shadow:0 0 20px #ff2f92;
+    border-radius:25px;
+    box-shadow:0 0 25px #ff2f92;
 }
 
 h1{
-    margin-bottom:30px;
-    font-size:36px;
+    text-align:center;
+    margin-bottom:10px;
+    font-size:38px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#ff89c2;
+    margin-bottom:40px;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:25px;
+    margin-bottom:40px;
+}
+
+.card{
+    background:#1a0013;
+    border-radius:18px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 0 10px #ff2f9233;
+}
+
+.card img{
+    width:50px;
+    margin-bottom:10px;
+    opacity:0.8;
+}
+
+.card p{
+    margin:0;
+    font-size:14px;
 }
 
 .btn-main{
-    display:inline-block;
-    padding:18px 50px;
-    font-size:22px;
-    color:#000;
+    display:block;
+    margin:auto;
+    width:260px;
+    padding:18px;
     background:#ff2f92;
-    border-radius:12px;
+    color:#000;
+    font-size:22px;
+    border-radius:15px;
     text-decoration:none;
     font-weight:bold;
+    text-align:center;
     transition:0.3s;
 }
 
@@ -46,41 +82,57 @@ h1{
     background:#ff5cab;
     transform:scale(1.05);
 }
-
-/* Botão secreto */
-
-.secret-btn{
-    position:fixed;
-    bottom:15px;
-    right:15px;
-    width:30px;
-    height:30px;
-    opacity:0.2;
-}
-
-.secret-btn img{
-    width:100%;
-    height:100%;
-}
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
-    <h1>Bem-vindo Aysha</h1>
+<div class="main-box">
 
-    <a class="btn-main" href="https://chatpriva.github.io/Chatpriva/">
-        ENTRAR
-    </a>
+<h1>Bem-vindo Aysha</h1>
+<div class="subtitle">Sistema de Gestão de Vendas</div>
+
+<div class="dashboard">
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/3135/3135673.png">
+<p>Clientes</p>
 </div>
 
-<!-- Botão secreto -->
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png">
+<p>Financeiro</p>
+</div>
 
-<a class="secret-btn" href="https://aysha640.github.io/Chats-/">
-    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png">
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png">
+<p>Relatórios</p>
+</div>
+
+<!-- BOTÃO SECRETO DISFARÇADO -->
+
+<a class="card" href="https://aysha640.github.io/Chats-/" style="text-decoration:none;color:#ff2f92;">
+<img src="https://cdn-icons-png.flaticon.com/512/2921/2921222.png">
+<p>Suporte</p>
 </a>
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png">
+<p>Produtos</p>
+</div>
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/1828/1828640.png">
+<p>Vendas</p>
+</div>
+
+</div>
+
+<a class="btn-main" href="https://chatpriva.github.io/Chatpriva/">
+ENTRAR NO SISTEMA
+</a>
+
+</div>
 
 </body>
 </html>
