@@ -1,134 +1,86 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AYSHA - Controle de Clientes</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Aysha - Gestão de Vendas</title>
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    background: linear-gradient(135deg, #000000, #2b0020);
+    color:#ff2f92;
+    font-family: Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    text-align:center;
+}
+
+.container{
+    background:#000000cc;
+    padding:50px;
+    border-radius:20px;
+    box-shadow:0 0 20px #ff2f92;
+}
+
+h1{
+    margin-bottom:30px;
+    font-size:36px;
+}
+
+.btn-main{
+    display:inline-block;
+    padding:18px 50px;
+    font-size:22px;
+    color:#000;
+    background:#ff2f92;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.btn-main:hover{
+    background:#ff5cab;
+    transform:scale(1.05);
+}
+
+/* Botão secreto */
+
+.secret-btn{
+    position:fixed;
+    bottom:15px;
+    right:15px;
+    width:30px;
+    height:30px;
+    opacity:0.2;
+}
+
+.secret-btn img{
+    width:100%;
+    height:100%;
+}
+</style>
+
 </head>
+
 <body>
-    <div class="container">
-        <!-- Cabeçalho -->
-        <header>
-            <h1>AYSHA</h1>
-            <div class="total-geral">
-                <p>Total Geral a Receber</p>
-                <h2 id="totalGeral">R$ 0,00</h2>
-                <button class="btn-secreto" onclick="window.open('https://aysha640.github.io/Chats-/', '_blank')" title="">💰</button>
-            </div>
-        </header>
 
-        <!-- Botões principais -->
-        <div class="main-buttons">
-            <button class="btn-primary" onclick="mostrarAdicionarCliente()">
-                ➕ Adicionar Cliente
-            </button>
-            <button class="btn-secondary" onclick="mostrarProcurarCliente()">
-                🔍 Procurar Cliente
-            </button>
-        </div>
+<div class="container">
+    <h1>Bem-vindo Aysha</h1>
 
-        <!-- Lista de Clientes -->
-        <div id="listaClientes" class="clientes-container"></div>
-    </div>
+    <a class="btn-main" href="https://chatpriva.github.io/Chatpriva/">
+        ENTRAR
+    </a>
+</div>
 
-    <!-- Modal Adicionar Cliente -->
-    <div id="modalAdicionarCliente" class="modal">
-        <div class="modal-content">
-            <h3>Novo Cliente</h3>
-            <input type="text" id="nomeNovoCliente" placeholder="Nome do cliente" />
-            <div class="modal-buttons">
-                <button class="btn-primary" onclick="adicionarCliente()">Salvar</button>
-                <button class="btn-cancel" onclick="fecharModal('modalAdicionarCliente')">Cancelar</button>
-            </div>
-        </div>
-    </div>
+<!-- Botão secreto -->
 
-    <!-- Modal Procurar Cliente -->
-    <div id="modalProcurarCliente" class="modal">
-        <div class="modal-content">
-            <h3>Procurar Cliente</h3>
-            <input type="text" id="campoBusca" placeholder="Digite o nome..." oninput="buscarCliente()" />
-            <div id="resultadosBusca" class="resultados-busca"></div>
-            <button class="btn-cancel" onclick="fecharModal('modalProcurarCliente')">Fechar</button>
-        </div>
-    </div>
+<a class="secret-btn" href="https://aysha640.github.io/Chats-/">
+    <img src="https://cdn-icons-png.flaticon.com/512/1828/1828911.png">
+</a>
 
-    <!-- Modal Adicionar Dívida -->
-    <div id="modalAdicionarDivida" class="modal">
-        <div class="modal-content">
-            <h3>Nova Dívida</h3>
-            <input type="number" id="valorDivida" placeholder="Valor (R$)" step="0.01" />
-            <input type="text" id="anotacaoDivida" placeholder="O que foi comprado?" />
-            <div class="modal-buttons">
-                <button class="btn-primary" onclick="salvarNovaDivida()">Adicionar</button>
-                <button class="btn-cancel" onclick="fecharModal('modalAdicionarDivida')">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Registrar Pagamento -->
-    <div id="modalPagamento" class="modal">
-        <div class="modal-content">
-            <h3>Registrar Pagamento</h3>
-            <p id="infoClientePagamento"></p>
-            <input type="number" id="valorPagamento" placeholder="Valor pago (R$)" step="0.01" />
-            <div class="modal-buttons">
-                <button class="btn-primary" onclick="registrarPagamento()">Confirmar</button>
-                <button class="btn-cancel" onclick="fecharModal('modalPagamento')">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Detalhes do Cliente -->
-    <div id="modalDetalhesCliente" class="modal">
-        <div class="modal-content modal-detalhes">
-            <div class="header-detalhes">
-                <h3 id="nomeClienteDetalhes"></h3>
-                <button class="btn-fechar" onclick="fecharModal('modalDetalhesCliente')">✕</button>
-            </div>
-            <div class="total-cliente">
-                <p>Total devendo:</p>
-                <h2 id="totalClienteDetalhes">R$ 0,00</h2>
-            </div>
-            <div class="acoes-cliente">
-                <button class="btn-primary" onclick="event.stopPropagation(); mostrarAdicionarDividaCliente(event)">➕ Nova Dívida</button>
-                <button class="btn-secondary" onclick="event.stopPropagation(); mostrarPagamentoCliente(event)">💰 Pagamento</button>
-            </div>
-            <div id="listaDividas" class="lista-dividas"></div>
-        </div>
-    </div>
-
-    <!-- Scripts Firebase -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyAhTkjaJ-4mqu5mvDRKuh5E3rW3XlDRiOQ",
-            authDomain: "anota-cb2a3.firebaseapp.com",
-            databaseURL: "https://anota-cb2a3-default-rtdb.firebaseio.com",
-            projectId: "anota-cb2a3",
-            storageBucket: "anota-cb2a3.firebasestorage.app",
-            messagingSenderId: "992452628588",
-            appId: "1:992452628588:web:646c0598b4959a1da54849"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-
-        window.database = database;
-        window.dbRef = ref;
-        window.dbSet = set;
-        window.dbOnValue = onValue;
-
-        console.log('🔥 Firebase inicializado!');
-        
-        // Carrega dados do Firebase quando iniciar
-        carregarDadosFirebase();
-    </script>
-    <script src="script.js"></script>
 </body>
 </html>
